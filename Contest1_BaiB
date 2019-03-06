@@ -1,0 +1,67 @@
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+bool check = false;
+void Sinh(int n, int a[20]){
+	int i = n;
+	while(i > 0 && a[i] == 1) {
+		a[i] = 0;
+		i--;
+	}
+	if(i <= 0) check = true;
+	else{
+		a[i] = 1;
+	}
+}
+int Kiemtra(int n, int a[],int k){
+	int demt = 0;
+	int dem = 0;
+	for(int i = 1; i <= n; i++){
+		while(a[i] == 0 && i <= n){
+			dem++;
+			i++;
+		}
+		
+		if(dem == k) demt++;
+		dem = 0;
+	}
+	if(demt == 1) return 1;
+	else return 0;
+	
+}
+void in(int n, int a[20],int k){
+	if(Kiemtra(n,a,k) == 1){
+		for(int i = 1; i <= n; i++){
+			if(a[i] == 0) cout <<"A";
+			else cout <<"B";
+		}
+		cout << endl;
+	}
+}
+
+main(){
+	int n, k;
+	cin >> n >> k;
+	int a[20];
+	for(int i = 1; i <= n; i++){
+		a[i] = 0;
+	}
+	int dem = 0;
+	while(check == false){
+		
+		if(Kiemtra(n,a,k) == 1){
+			dem++;
+		}
+		Sinh(n,a);
+	}
+	check = false;
+	for(int i = 1; i <= n; i++){
+		a[i] = 0;
+	}
+	cout << dem << endl;
+	while(check == false){
+		in(n,a,k);
+		Sinh(n,a);
+	}
+    return 0;
+}
