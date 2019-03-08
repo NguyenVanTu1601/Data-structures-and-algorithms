@@ -1,0 +1,54 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define M 1000000007;
+int n;
+struct MaTran
+{
+    long long c[10][10];
+};
+ 
+MaTran operator * (MaTran a, MaTran b)
+{
+    MaTran res;
+    for (int i=0; i < n; i++)
+        for (int j=0; j<n; j++)
+        {
+            res.c[i][j] = 0;
+            for (int k=0; k<n; k++)
+                res.c[i][j] = (res.c[i][j]+a.c[i][k]*b.c[k][j]) % M;
+        }
+    return res;
+}
+ 
+MaTran power (MaTran a, long long n)
+{
+    if (n==1) return a;
+    if (n % 2 == 1) return power(a,n-1) * a;
+    MaTran tmp = power(a,n/2);
+    return tmp*tmp;
+}
+ 
+int main()
+{
+    int t;
+    cin >> t;
+    long long k;
+    while(t--){
+    	cin >> n >> k;
+	    MaTran A;
+	    for(int i = 0; i < n; i++){
+	    	for(int j = 0; j < n; j++){
+	    		cin >> A.c[i][j];
+			}
+	
+		}
+	    A = power(A,k);
+	    for(int i = 0; i < n; i++){
+	    	for(int j = 0; j < n; j++){
+	    		cout << A.c[i][j] << " ";
+			}
+			cout << endl;
+		}
+   }
+    return 0;
+}
