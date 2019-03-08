@@ -1,7 +1,9 @@
 #include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
-
+/* Do moi lan cho ca 2 người đều chơi tối ưu
+=> KQ thu được la Min chứ ko phải Max
+*/
 int b[10];
 int chuaxet[10];
 long long Min = 1e9+7;
