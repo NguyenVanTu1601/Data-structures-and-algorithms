@@ -1,0 +1,28 @@
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+int a[101];
+int L[101][25001];
+main(){
+	int n, c;
+	cin >> c >> n;
+	
+	for(int i = 1; i <= n; i++){
+	    cin >> a[i];
+	}
+	
+	for(int j = 0; j <= c; j++){
+		L[0][j] = 0;
+		//L[j][0] = 0;
+	}
+	for(int i = 1; i <= n; i++){
+		for(int j = 0; j <= c; j++){
+			L[i][j] = L[i-1][j];
+			if(a[i] <= j){
+				L[i][j] = max(L[i][j], L[i-1][j-a[i]] + a[i]);
+			}
+		}
+	}
+	cout << L[n][c];
+    return 0;
+}
