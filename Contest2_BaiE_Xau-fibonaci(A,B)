@@ -1,0 +1,28 @@
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+long long Fi[92];
+
+char Fibo(int n, long long i){
+	if(n == 1) return 'A';
+	if(n == 2) return 'B';
+	if(i <= Fi[n-2]) return Fibo(n-2,i);
+	return Fibo(n-1, i - Fi[n-2]);
+}
+main(){
+	
+	Fi[1] = 1;
+	Fi[2] = 1;
+	for(int i = 3; i <= 92; i++){
+		Fi[i] = Fi[i - 1] + Fi[i - 2];
+	}
+	int t;
+	cin >> t;
+	int n;
+	long long i;
+	while(t--){
+		cin >> n >> i;
+		cout << Fibo(n,i) << endl;
+	}
+    return 0;
+}
