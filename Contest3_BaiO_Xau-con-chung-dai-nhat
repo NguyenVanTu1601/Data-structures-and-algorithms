@@ -1,0 +1,26 @@
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+int L[1001][1001];
+main(){
+	string a, b;
+	cin >> a >> b;
+	int x = a.length();
+	int y = b.length();
+	
+	for(int i = 0; i < x; i++){
+		L[i][0] = 0;
+	}
+	for(int j = 0; j < y; j++){
+			L[0][j] = 0;
+	}
+	
+	for(int i = 0; i < x; i++){
+		for(int j = 0; j < y; j++){
+			if(a[i] == b[j]) L[i+1][j+1] = L[i][j] + 1;
+			else L[i+1][j+1] = max(L[i+1][j], L[i][j+1]);
+		}
+	}
+	cout << L[x][y];
+    return 0;
+}
