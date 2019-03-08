@@ -1,0 +1,53 @@
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+
+int b[10];
+int chuaxet[10];
+long long Min = 1e9+7;
+int a[10][10];
+int n;
+
+void Try(int i)
+{
+	for(int j = 1; j <= n; j++ )
+	{	
+		if(chuaxet[j])
+		{
+			b[i] = j;
+			chuaxet[j] = 0;
+			if(i == n) {
+				long long diem = 0;
+				for(int k = 1; k <= n; k++){
+					diem += a[k][b[k]];
+					
+				}
+				
+				if(diem < Min ) Min = diem;
+			}
+			
+			else Try(i+1);
+			chuaxet[j] = 1;
+		}
+	}
+}
+main(){
+	int t;
+	cin >> t;
+	while(t--){
+		cin >> n;
+		for(int i = 1; i <= n; i++){
+			for(int j = 1; j <= n; j++){
+				cin >> a[i][j];
+			}
+		}
+		for(int i = 1; i <= n ;i++){
+			chuaxet[i] = 1;
+		}
+		
+		Try(1);
+		cout << Min << endl;
+		Min = 1e9+7;
+	}
+    return 0;
+}
