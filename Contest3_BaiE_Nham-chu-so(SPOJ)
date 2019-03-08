@@ -1,0 +1,29 @@
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+int Max(string s){
+	int sum = 0;
+	for(int i = 0; i < s.length(); i++){
+		if(s[i] == '5') sum = sum * 10 + (s[i] - '0')  + 1;
+		else sum = sum * 10 + (s[i] - '0');
+	}
+	
+	return sum;
+}
+
+int Min(string s){
+	int sum = 0;
+	for(int i = 0; i < s.length(); i++){
+		if(s[i] == '6') sum = sum * 10 + ((s[i] - '0')  - 1);
+		else sum = sum * 10 + (s[i] - '0');
+	}
+	
+	return sum;
+}
+main(){
+	string a, b;
+	cin >> a;
+	cin >> b;
+	cout << Min(a) + Min(b) << " " << Max(a) + Max(b);
+    return 0;
+}
