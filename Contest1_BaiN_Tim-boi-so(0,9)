@@ -37,22 +37,24 @@ main(){
 		//else{
 			for(int n = 1; n <= 20; n++){
 			    int a[20];
+			    // Lay so 0000..09 vi 000..00 luon chia het cho moi so
 			    for(int i = 1 ; i < n; i++){
 					a[i] = 0;
 				}
 				a[n] = 9;
-					 check = false;
-					int kt = 1;
-					while(check == false){
-						if(Sum(n,a) % x == 0){
-							cout << Sum(n,a) << endl;
-							kt = 0;
-							break;
-						}
-						Sinh(n,a);
+				// Sinh cac to hop ke tiep 00...009
+				check = false;
+				int kt = 1;
+				while(check == false){
+					if(Sum(n,a) % x == 0){
+						cout << Sum(n,a) << endl;
+						kt = 0;
+						break;
 					}
-					if(kt == 0) break;
+					Sinh(n,a);
 				}
+				if(kt == 0) break;
+			}
 		    //}
 		}
 		
