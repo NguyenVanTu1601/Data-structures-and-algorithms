@@ -1,0 +1,75 @@
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+bool check = false;
+void Sinh(int n,  int a[]){
+	int i = n - 1;
+	while(i > 0 && a[i] > a[i+1]) i--;
+	if(i <= 0) check = true;
+	else{
+		int k = n;
+		while(a[i] > a[k]) k--;
+		int temp = a[i];
+		a[i] = a[k];
+		a[k] = temp;
+		int r = i + 1;
+		int s = n;
+		while(r <= s){
+			temp = a[r];
+			a[r] = a[s];
+			a[s] = temp;
+			r++;
+			s--;
+		}
+		
+	}
+}
+void in(int n,int a[]){
+	for(int i = 1; i <= n; i++){
+		cout << a[i];
+	}
+	cout << endl;
+}
+
+int Kiemtra(int arr[11][11], int k, int a[], int n){
+	int sum = 0;
+	for(int i = 1; i <= n; i++){
+		sum = sum + arr[i][a[i]];
+	}
+	if(sum == k) return 1;
+	else return 0;
+}
+main(){
+	int n,k;
+	int a[100];
+	cin >> n >> k;
+	int arr[11][11];
+	int b[1000];
+	for(int i = 1; i <= n; i++){
+		a[i] = i;
+	}
+	for(int i = 1; i <= n; i++){
+		for(int j = 1; j <= n; j++){
+			cin >> arr[i][j];
+		}
+	}
+	int x = 1;
+	int dem = 0;
+	while(check == false){
+		if(Kiemtra(arr,k,a,n) == 1) {
+			dem++;
+			for(int i = 1; i <= n; i++){
+				b[x] = a[i];
+			    x++;
+			}
+			
+		}
+		Sinh(n,a);
+	}
+	cout << dem << endl;
+	for(int i = 1; i < x; i++){
+		cout << b[i] << " ";
+	    if(i % n == 0) cout << endl;
+	}
+    return 0;
+}
