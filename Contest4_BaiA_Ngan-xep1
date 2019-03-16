@@ -1,0 +1,41 @@
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+int a[1000];
+int x;
+int top = -1;
+void Push(int x){
+	top++;
+	a[top] = x;
+}
+int Pop(){
+	top--;
+}
+int Empty(){
+	if(top == -1) return 1; // rong
+	else return 0; // khong rong
+}
+
+main(){
+	string s;
+	while(cin >> s){
+		if(s == "push"){
+			cin >> x;
+			Push(x);
+		}
+		else if(s == "pop") {
+			if(Empty() == 0) Pop();
+		}
+		
+		else if(s =="show"){
+			if(Empty() == 1) cout << "empty" << endl;
+			else{
+				for(int i = 0; i <= top; i++){
+					cout << a[i] << " ";
+				}
+				cout << endl;
+			}
+		}
+	}
+    return 0;
+}
