@@ -1,0 +1,33 @@
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+/*
+ Duyệt vào stack , gặp toán hạng thì in ra , gặp toán tử thì push vào stack 
+ Gặp ) thì pop stack ra
+*/
+
+main(){
+	int t;
+	cin >> t;
+	string s;
+	while(t--){
+		cin >> s;
+		stack<char> q;
+		for(int i = 0; i < s.length(); i++){
+			if(s[i] >= 'a' && s[i] <= 'z') cout << s[i];
+			else if(s[i] == '+' || s[i] == '-' || s[i] == '*' || s[i] == '/') q.push(s[i]);
+			else if(s[i] == ')'){
+				cout << q.top();
+				q.pop();
+			}
+		}
+		if(!q.empty()){
+			while(!q.empty()){
+				cout << q.top();
+				q.pop();
+			}
+		}
+		cout << endl;
+	}
+    return 0;
+}
