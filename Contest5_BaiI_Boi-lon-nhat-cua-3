@@ -1,0 +1,97 @@
+Tạo 3 vector lưu trữ 3 thành phần 
++ Các số chia hết cho 3 (ans)
++ Các số chia 3 dư 1 (a1)
++ Các số chia 3 dư 2 (a2)
+Hiển nhiên các số % 3 == 0 nằm trong kết quả 
+Cứ 3 số đồng dư cho 3 thì tổng cũng chia hết cho 3 (1) 
+(1 số % 3 = 1) + ( 1 số % 3 = 2) sẽ chia hết cho 3 
+Do đó ta sẽ tách thành 3 nhóm trên và kiểm tra 2 nhóm a1,a2
+Nếu a1 có số phần tử > a2 thì 
+   + (a1-a2) % 3 == 2
+       + tức là bỏ 2 phần tử a1 thì sau khi xét hết a2 , số pt còn trong a1 sẽ chia hết cho 3 hay có thể tiếp tục thêm vào theo (1)
+       + hoặc bỏ 1 phần tử a2 thì cũng tương tự trên
+       VD : ( a1 có 7 , a2 có 5)
+   + (a1- a2) % 3 = 1
+       => bỏ a1 đi 1 phần tử thì số còn lại sẽ đủ để ghép VD (12 5)
+Nếu a2 có số phần tử lớn hơn => Kiểm tra điều kiện ngược vs TH trên
+Cuối cùng đưa các số còn lại ở a1,a2 vào ans 
+Chú ý do đề yêu cầu số lớn nhất nên mỗi lần trc khi ghép vào ans hay tính a1,a2 cần sắp xếp lại tăng dần( vector bỏ cuối : pop_back)
+
+
+
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+bool cmp(int a, int b){
+	return a > b;
+}
+main(){
+	int t;
+	cin >> t;
+	int n;
+	while(t--){
+		cin >> n;
+		vector <int> ans;
+		vector <int> a1;
+		vector <int> a2;
+		int x;
+		for(int i = 0; i < n; i++){
+			cin >> x;
+			if(x % 3 == 0) ans.push_back(x);
+			else if(x % 3 == 1) a1.push_back(x);
+			else a2.push_back(x);
+		}
+		sort(a1.begin(), a1.end(), cmp);
+		sort(a2.begin(), a2.end(), cmp);
+		
+		if(a1.size() > a2.size()){
+			// a1 % 3 = 1 , a2 % 3 = 2 => a1+a2 % 3 = 0
+			// a1 % 3 = 1 => 3 pt cua a1 se % 3 = 0 tuong tu vs a2
+			// Xoa phan tu de a1 == a2 hoac ; (a2 - a1) % 3 == 0;
+			if((a1.size() - a2.size()) % 3 == 2 ){
+				if(a2.size() > 0) a2.pop_back();
+				else{
+					a1.pop_back();
+					a1.pop_back();
+				}
+			}
+			if((a1.size() - a2.size()) % 3 == 1 ){
+				a1.pop_back();
+			}
+		}
+		if(a1.size() < a2.size()){
+			// a1 % 3 = 1 , a2 % 3 = 2 => a1+a2 % 3 = 0
+			// a1 % 3 = 1 => 3 pt cua a1 se % 3 = 0 tuong tu vs a2
+			// Xoa phan tu de a1 == a2 hoac ; (a2 - a1) % 3 == 0;
+			if((a2.size() - a1.size()) % 3 == 2 ){
+				if(a1.size() > 0) a1.pop_back();
+				else{
+					a2.pop_back();
+					a2.pop_back();
+				}
+			}
+			if((a2.size() - a1.size()) % 3 == 1 ){
+				a2.pop_back();
+			}
+		}
+		
+		for(int i = 0; i < a1.size(); i++){
+			ans.push_back(a1[i]);
+		}
+		for(int i = 0; i < a2.size(); i++){
+			ans.push_back(a2[i]);
+		}
+		sort(ans.begin(), ans.end(), cmp);
+		if(ans.size() == 0) cout << -1 << endl;
+		else{
+			if(ans[0] == 0) cout << "0" << endl;
+			else{
+				for(int i = 0; i < ans.size(); i++){
+					cout << ans[i];
+				}
+				cout << endl;
+			}
+		}
+	}
+    return 0;
+}
