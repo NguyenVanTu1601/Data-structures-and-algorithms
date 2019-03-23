@@ -1,0 +1,59 @@
+-	Nếu gặp toán hạng thì đưa ra 
+-	Nếu gặp ( thì push vào stack
+-	Nếu gặp ) thì pop trong stack ra tới khi gặp ( thì pop luôn ( 
+-	Nếu gặp toán tử (+-..) thì kiểm tra
+   + While stack ko rỗng và toán tử ở đỉnh stack có độ ưu tiên > toán tử s[i] hiện tại thì pop toán tử ở đỉnh
+   +Hết while thì push toán tử hiện tại vào stack;
+Sau cùng kiểm tra trong stack còn j ko , còn thì in hết ra 
+
+
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+// Xet do uu tien
+int Ut(char x){
+	if(x == '+') return 1;
+	if(x == '-') return 1;
+	if(x == '*') return 2;
+	if(x == '/') return 2;
+	if(x == '^') return 3;
+	return 0;
+}
+
+main(){
+	int t;
+	string s;
+	cin >> t;
+	while(t--){
+		stack < char > q;
+		cin >> s;
+		for(int i = 0; i < s.length(); i++){
+			if(s.at(i) >= 'a' && s.at(i) <= 'z') cout << s.at(i);
+			if(s.at(i) == '(') q.push(s.at(i));
+			if(s.at(i) == ')'){
+				while(q.top() != '('){
+					cout << q.top();
+					q.pop();
+				}
+				q.pop();
+			}
+			// Doan xam nho @@ 
+			if((s.at(i) == '+') || (s.at(i) == '-') || (s.at(i) == '*') || (s.at(i) == '/') || (s.at(i) == '^')){
+				while(!q.empty() && Ut(q.top()) >= Ut(s.at(i))){
+					cout << q.top();
+					q.pop();
+				}
+				q.push(s.at(i));
+			}
+			//
+		}
+		if(!q.empty()){
+			while(!q.empty()){
+				cout << q.top();
+				q.pop();
+			}
+		}
+		cout << endl;
+	}
+    return 0;
+}
