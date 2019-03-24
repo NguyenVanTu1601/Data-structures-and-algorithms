@@ -1,0 +1,52 @@
+Duyệt từ phải sang trái số n(dạng string)
+Gặp n[i] > 1 thì push 1 vào queue. Ngược lại push n[i] vào queue 
+sau khi cho hết vào thì ktra
+Trong khi queue không rỗng , lấy đỉnh queue ( 0,1) * 2 ^ (size(queue) - 1) và cộng lại 
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+string n;
+int check;
+
+void bdn(){
+	int sum=0;
+	check=0;
+	queue <char> q;
+	for (int i=0;i<n.length();i++){
+		if (n[i]>'1'){
+			q.push('1');
+			check=1;
+			continue;
+		}
+		if (!check){
+			if (n[i]=='1') q.push('1');
+			if (n[i]=='0') q.push('0');
+		}else {
+			q.push('1');	
+		}
+		
+	}
+	int l = q.size();
+
+	while (!q.empty()){
+		char tmp=q.front();
+		sum += (tmp - '0')*pow(2,l-1);
+		q.pop();
+		l--;
+	}
+	cout << sum << endl;
+}
+
+int main(){
+	ios_base::sync_with_stdio(0);
+	int t; cin >> t;
+	while (t--){
+		
+		cin >> n;
+		bdn();
+	}
+	
+//	cout << endl << isSmaller("11");
+}
