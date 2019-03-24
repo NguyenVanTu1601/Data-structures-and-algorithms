@@ -1,0 +1,46 @@
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+
+main(){
+	int t;
+	cin >> t;
+	deque<int> dq;
+	string s;
+	while(t--){
+		cin >> s;
+		if(s == "PUSHFRONT"){
+			int x;
+			cin >> x;
+			dq.push_front(x);
+		}
+		if(s == "POPFRONT"){
+			if(dq.size() != 0){
+				dq.pop_front();
+			}
+		}
+		if(s == "PRINTFRONT"){
+			if(dq.size() == 0) cout << "NONE" << endl;
+			else{
+				cout << dq.front() << endl;
+			}
+		}
+		if(s == "PUSHBACK"){
+			int x;
+			cin >> x;
+			dq.push_back(x);
+		}
+		if(s == "POPBACK"){
+			if(dq.size() != 0){
+				dq.pop_back();
+			}
+		}
+		if(s == "PRINTBACK"){
+			if(dq.size() == 0) cout << "NONE" << endl;
+			else{
+				cout << dq.back() << endl;
+			}
+		}
+	}
+    return 0;
+}
