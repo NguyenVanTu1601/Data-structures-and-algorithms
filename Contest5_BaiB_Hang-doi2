@@ -1,0 +1,28 @@
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+
+main(){
+	int t;
+	cin >> t;
+	string s;
+	queue<int> q;
+	while(t--){
+		cin >> s;
+		if(s == "PUSH"){
+			int x;
+			cin >> x;
+			q.push(x);
+		}
+		if(s == "POP"){
+			if(!q.empty()){
+				q.pop();
+			}
+		}
+		if(s == "PRINTFRONT"){
+			if(q.empty()) cout << "NONE" << endl;
+			else cout << q.front() << endl;
+		}
+	}
+    return 0;
+}
