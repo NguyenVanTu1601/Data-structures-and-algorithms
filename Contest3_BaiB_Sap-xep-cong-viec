@@ -1,3 +1,7 @@
+Sắp xếp công việc theo thời gian kết thúc sau đó duyệt từ đầu 
++ Nếu vị trí i+1 có bắt đầu >= kết thúc của i thì gán i = i + 1 và đếm tăng
+
+
 #include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
