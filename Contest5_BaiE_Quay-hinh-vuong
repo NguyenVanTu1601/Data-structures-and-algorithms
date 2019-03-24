@@ -1,0 +1,112 @@
+Chuyển mảng thành số push vào queue 
+Khi queue không rỗng lấy ra số ở đỉnh và quay , quay xong kiểm tra
++ Hình vừa quay đã có chưa (check)
++ Nếu chưa có thì đếm(hình vừa quay) = đêm(hình đỉnh) + 1 
+=> Hình cần quay có đếm tại đó là kq
+
+
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+int check[1000000];
+int arr[7];
+int dem[1000000];
+
+void quayhvtrai(int a[6]){
+	int temp = a[1];
+	a[1] = a[4];
+	a[4] = a[5];
+	a[5] = a[2];
+	a[2] = temp;
+}
+
+void quayhvphai(int a[6]){
+	int temp = a[3];
+	a[3] = a[2];
+	a[2] = a[5];
+	a[5] = a[6];
+	a[6] = temp;
+}
+// chuyển số sang mảng để quay
+void toArray(int value[], int num)
+{
+    for (int i = 6; i >= 1; i--)
+    {
+        value[i] = num % 10;
+        num /= 10;
+    }
+}
+// chuyển mảng về số để push vào queue
+int toNumber(int value[])
+{
+    int res = 100000 * value[1] + 10000 * value[2] + 1000 * value[3] + 100 * value[4] + 10 * value[5] + value[6];
+    return res;
+}
+
+main(){
+	ios_base::sync_with_stdio(false);
+	int a[6];
+	int b[6];
+	memset(check,-1,sizeof(check));
+	memset(dem,0,sizeof(dem));
+	
+	for(int i = 1; i <= 6; i++){
+		cin >> a[i];
+	}
+	for(int i = 1; i <= 6; i++){
+		cin >> b[i];
+	}
+	
+	int num = toNumber(a);
+	int Num = toNumber(b);
+	
+	if(num == Num) cout << "0";
+	else{
+		int dem1 = 0;
+		int kt = 1;
+		queue<int> q;
+	    q.push(num);
+		while(!q.empty()){
+			num = q.front();
+			q.pop();
+			// vòng for để quay cùng lúc 2 hình trog 1 lần duyệt
+			for(int i = 0; i <= 1; i++){
+				if(i == 0){
+					dem1++;
+					toArray(arr,num);
+					quayhvtrai(arr);
+					int tem = toNumber(arr);
+					
+					if(check[tem] == -1){
+						dem[tem] = dem[num] + 1;
+						q.push(tem);
+					}
+				}
+					
+				if(i == 1){
+					toArray(arr,num);
+					quayhvphai(arr);
+					int tem = toNumber(arr);
+					
+					if(check[tem] == -1){
+					
+						dem[tem] = dem[num] + 1;
+						q.push(tem);
+					}
+				}	
+			}
+			if(dem[Num] > 0){
+				cout << dem[Num] << endl;
+				break;
+			}
+			/*if(dem1 > 50){
+				cout << "0";
+				break;
+			}*/
+			
+			
+		}
+	}
+		
+    return 0;
+}
