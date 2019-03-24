@@ -1,0 +1,82 @@
+Push số vào đầu vào queue
+Trong khi queue không rỗng lấy các số đầu tiên ra
+   + Thay đổi lần lượt từng chữ số của số ban đầu
+   + Mỗi khi được 1 số , kiểm tra xem số đó đã có chưa , và có phải snt ko
+     Nếu thỏa mãn thì push vào queue 
+     Đồng thời đếm số bước tại số vừa push vào = số bước của số ở đỉnh queue lúc đó + 1 
+=> KQ chính là đếm tại đầu ra
+
+
+#include<iostream>
+#include<bits/stdc++.h>
+#define max 100005
+using namespace std;
+int T, s, d, digit[4];
+int prime[max], dist[max];
+void Sangnt()
+{
+    for (int i = 2; i < 10000; i++)
+    {
+        if (prime[i])
+        {
+            int num = i;
+            for (int j = 2; num*j <=max; j++)
+                prime[num*j] =0;
+        }
+    }
+}
+void toArray(int value[], int num)
+{
+    for (int i = 3; i >= 0; i--)
+    {
+        value[i] = num % 10;
+        num /= 10;
+    }
+}
+int toNumber(int value[])
+{
+    int res = 1000 * value[0] + 100 * value[1] + 10 * value[2] + value[3];
+    return res;
+}
+int main()
+{
+    for(int i = 0; i < max; i++){
+    	prime[i] = -1;
+	}
+    Sangnt();
+    cin >> T;
+    while (T--){
+        cin >> s >> d;
+        if(s == d) cout << "0" << endl;
+        else{
+        	for(int i = 0; i < max; i++){
+	        	dist[i] = -1;
+			}
+	        queue<int> q;
+	        q.push(s);
+	        dist[s] = 0;
+	        while (!q.empty())
+	        {
+	            s = q.front();
+	            q.pop();
+	            for (int i = 0; i <= 3; i++)
+	            {
+	                toArray(digit, s);
+	                for (int j = 0; j <= 9; j++)
+	                {
+	                    digit[i] = j;
+	                    int temp = toNumber(digit);
+	                    if (prime[temp] == -1 && temp > 1000 && dist[temp] == -1)
+	                    {
+	                        dist[temp] = dist[s] + 1;
+	                        q.push(temp);
+	                    }
+	                }
+	            }
+	        }
+	        cout << dist[d] << endl;
+		}
+        
+    }
+    return 0;
+}
