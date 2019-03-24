@@ -1,0 +1,109 @@
+- Đầu tiên duyệt đưa hết vị trí = 2 ( hạt đã mọc) vào queue
+- Trong khi queue không rỗng  
+   + Lấy mỗi đỉnh queue và duyệt lan sang xung quanh 1 ô 
+       Nếu gặp ô 1 thì tăng ô lên 2 và đếm tại ô đó = đếm tại đỉnh queue + 1 
+- Cuối dùng duyệt lại ma trận nếu vẫn còn ô 1 thì in ra -1 ngược lại in ra max ma trận
+
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+struct vitri{
+	int hang;
+	int cot;
+};
+int dem[501][501];
+int check[501][501];
+
+main(){
+	int r,c;
+	cin >> r >> c;
+	int a[r+5][c+5];
+	vitri x;
+	for(int i = 0; i <= r + 1; i++){
+		for(int j = 0; j <= c + 1; j++){
+			if(i == 0 || j == 0 || i == r + 1 || j == c + 1){
+				a[i][j] = 0;
+				dem[i][j] = 0;
+			}
+			else{
+				cin >> a[i][j];
+				dem[i][j] = 0;
+				if(a[i][j] == 2){
+					x.hang = i;
+					x.cot = j;
+				}
+			}
+			
+		}
+	}
+	
+	//////////////////////////////////////////////////////
+	queue<vitri> q;
+	for(int i = 1; i <= r; i++){
+		for(int j = 1; j <= c; j++){
+			if(a[i][j] == 2){
+				vitri x;
+				x.hang = i;
+				x.cot = j;
+				q.push(x);	
+			}
+		}
+	}
+	            while(!q.empty()){
+					vitri s = q.front();
+					q.pop();
+					for(int i = 1; i <= 4; i++){
+						if(i == 1){
+							if(a[s.hang-1][s.cot] == 1) {
+								vitri k;
+								k.hang = s.hang-1;
+								k.cot = s.cot;
+								a[s.hang-1][s.cot] = 2;
+								dem[s.hang-1][s.cot] = dem[s.hang][s.cot] + 1;
+								q.push(k);
+							}
+						}
+						if(i == 2){
+							if(a[s.hang][s.cot + 1] == 1) {
+								vitri k;
+								k.hang = s.hang;
+								k.cot = s.cot + 1;
+								a[k.hang][k.cot] = 2;
+								dem[k.hang][k.cot] = dem[s.hang][s.cot] + 1;
+								q.push(k);
+							}
+						}
+						if(i == 3){
+							if(a[s.hang+1][s.cot] == 1) {
+								vitri k;
+								k.hang = s.hang+1;
+								k.cot = s.cot;
+								a[s.hang+1][s.cot] = 2;
+								dem[s.hang+1][s.cot] = dem[s.hang][s.cot] + 1;
+								q.push(k);
+							}
+						}
+						if(i == 4){
+							if(a[s.hang][s.cot - 1] == 1) {
+								vitri k;
+								k.hang = s.hang;
+								k.cot = s.cot - 1;
+								a[k.hang][k.cot] = 2;
+								dem[k.hang][k.cot] = dem[s.hang][s.cot] + 1;
+								q.push(k);
+							}
+						}
+					}
+				}
+	int max = 0;
+	int dem1 = 0;
+	for(int i = 1; i <= r ; i++){
+		for(int j = 1; j <= c ; j++){
+			if(a[i][j] == 1) dem1++;
+			if(dem[i][j] > max) max = dem[i][j];
+	    }
+	}
+	if(dem1 > 0) cout << "-1";
+	else cout << max ;
+    return 0;
+}
