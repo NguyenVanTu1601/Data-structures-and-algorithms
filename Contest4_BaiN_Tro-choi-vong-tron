@@ -1,0 +1,19 @@
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+int p;
+main(){
+	int t;
+	cin >> t;
+	while(t--){
+		int n;
+		int k;
+		cin >> n >> k;
+		k = k + 1;
+		p = n * k;
+		while(p > n) p = p + (p - n - 1) / (k-1) - n;
+		cout << p << endl;
+	}
+	
+    return 0;
+}
