@@ -1,0 +1,40 @@
+#include<bits/stdc++.h>
+#define Fori(i,a,b) for(int i=a;i<=b;i++) 
+#define Ford(i,a,b) for(int i=a;i>=b;i--)
+#define Max 10000005
+using namespace std;
+long long  a[Max], l[Max],r[Max];
+main(){
+	std::ios::sync_with_stdio(false);
+	cin.tie(NULL);
+	int t;cin>>t;
+	while(t--){
+		long  n;
+		cin>>n;
+		Fori(i,1,n)	cin>>a[i];
+	
+		stack < long long  >  L,R;
+		
+		a[0]=0;a[n+1]=0;
+		
+		L.push(0);
+		Fori(i,1,n){
+			while(a[L.top()]>=a[i] )	L.pop();
+			l[i]=L.top();
+			L.push(i);
+		}
+
+		R.push(n+1);
+		Ford(i,n,1)	{
+			while(  a[R.top()]>=a[i] )	R.pop();
+			r[i]=R.top();
+			R.push(i);
+		}
+		long long  kq = 0;
+		Fori(i,1,n){
+			if(a[i]*(r[i]-l[i]-1)>kq)	kq = a[i]*(r[i]-l[i]-1);
+		}
+		cout<<kq<<endl;
+	}
+	return 0;
+}
