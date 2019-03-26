@@ -1,0 +1,25 @@
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+#define fori(i,a,b) for(int i=a;i<=b;i++)
+#define ll long long
+main(){
+	int n;
+	cin >> n;
+	int a[n+1];
+	int left[n+1];
+	stack <ll> L;
+	L.push(0);
+	fori(i,1,n) cin >> a[i];
+	a[0] = 1e6+7;
+	fori(i,1,n){
+		while(a[L.top()]<=a[i] )	L.pop();
+			left[i]=L.top();
+			L.push(i);
+	}
+	fori(i,1,n){
+		cout << i - left[i] << " ";
+	}
+	
+    return 0;
+}
