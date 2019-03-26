@@ -1,0 +1,200 @@
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+struct vitri{
+	int hang;
+	int cot;
+	int cao;
+};
+int dem[101][101][101];
+int check[101][101][101];
+main(){
+	int t;
+	cin >> t;
+	int a,b,c;
+	while(t--){
+		vitri x,y;
+		cin >> a >> b >> c;
+		// cao _  hang _ cot
+		char arr[a+10][b+10][c+10];
+		for(int i = 0; i <= a + 1; i++){
+			for(int j = 0; j <= b + 1; j++){
+				for(int k = 0; k <= c + 1; k++){
+					if(i == 0 || j == 0 || k == 0 || i == a + 1 || j == b + 1 || k == c + 1){
+						arr[i][j][k] = '#';
+						check[i][j][k] = 0;
+					}
+					else{
+						cin >> arr[i][j][k];
+						dem[i][j][k] = 0;
+						check[i][j][k] = 0;
+						if(arr[i][j][k] == 'S'){
+							x.cao = i;
+							x.hang = j;
+							x.cot = k;
+						}
+						if(arr[i][j][k] == 'E'){
+							y.cao = i;
+							y.hang = j;
+							y.cot = k;
+						}
+					}
+					
+				}
+			}
+		}
+		if(x.hang == y.hang && x.cot == y.cot && x.cao == y.cao){
+		    cout << "0" << endl;
+		}
+		else{
+			check[x.cao][x.hang][x.cot] = 1;
+			dem[x.cao][x.hang][x.cot] = 0;
+			queue < vitri > q;
+			q.push(x);
+			while(!q.empty()){
+				vitri s = q.front();
+				q.pop();
+				for(int j = 1; j <= 6; j++){
+					if(j == 1){
+						int i = s.hang - 1;
+						if(check[s.cao][i][s.cot] == 0){
+							if(arr[s.cao][i][s.cot] == '#'){
+								check[s.cao][i][s.cot] = 1;
+							}
+							else{
+							    check[s.cao][i][s.cot] = 1;
+							    if(dem[s.cao][i][s.cot] == 0) dem[s.cao][i][s.cot] = dem[s.cao][s.hang][s.cot] + 1;
+							    vitri m;
+								m.cao = s.cao;
+								m.hang = i;
+								m.cot = s.cot;
+								q.push(m);
+							}
+						}
+					}
+					
+					if(j == 2){
+						int i = s.cot + 1;
+						if(check[s.cao][s.hang][i] == 0){
+							if(arr[s.cao][s.hang][i] == '#'){
+								check[s.cao][s.hang][i] = 1;
+							}
+							else{
+							    check[s.cao][s.hang][i] = 1;
+							    if(dem[s.cao][s.hang][i] == 0) dem[s.cao][s.hang][i] = dem[s.cao][s.hang][s.cot] + 1;
+							    vitri m;
+							    m.cao = s.cao;
+							    m.hang = s.hang;
+							    m.cot = i;
+							    q.push(m);
+							}
+						}
+					}
+				
+					
+					if(j == 3){
+						//for(int i = s.hang + 1; i <= b; i++){
+						    int i = s.hang + 1;
+							if(check[s.cao][i][s.cot] == 0){
+								if(arr[s.cao][i][s.cot] == '#') {
+									check[s.cao][i][s.cot] = 1;
+								}
+							    else{
+								    check[s.cao][i][s.cot] = 1;
+								    if(dem[s.cao][i][s.cot] == 0) dem[s.cao][i][s.cot] = dem[s.cao][s.hang][s.cot] + 1;
+								    vitri m;
+								    m.cao = s.cao;
+								    m.hang = i;
+								    m.cot = s.cot;
+								    q.push(m);
+							    }
+							}
+							
+						//}
+					}
+					
+					if(j == 4){
+						//for(int i = s.cot - 1; i >= 1 ; i--){
+						int i = s.cot - 1;
+							if(check[s.cao][s.hang][i] == 0){
+								if(arr[s.cao][s.hang][i] == '#') {
+									check[s.cao][s.hang][i] = 1;
+								}
+							    else{
+								    check[s.cao][s.hang][i] = 1;
+								    if(dem[s.cao][s.hang][i] == 0) dem[s.cao][s.hang][i] = dem[s.cao][s.hang][s.cot] + 1;
+								    vitri m;
+								    m.cao = s.cao;
+								    m.hang = s.hang;
+								    m.cot = i;
+								    q.push(m);
+							    }
+							}
+							
+						//}
+					}
+					
+					if(j == 5){
+						int i = s.cao - 1;
+						if(check[i][s.hang][s.cot] == 0){
+							if(arr[i][s.hang][s.cot] == '#') {
+								check[i][s.hang][s.cot] = 1;	
+							}
+							else{
+							   check[i][s.hang][s.cot] = 1;
+							    if(dem[i][s.hang][s.cot] == 0) dem[i][s.hang][s.cot] = dem[s.cao][s.hang][s.cot] + 1;
+							    vitri m;
+							    m.cao = i;
+							    m.hang = s.hang;
+							    m.cot = s.cot;
+							    q.push(m);
+							}
+						}
+
+					}
+					if(j == 6){
+						int i = s.cao + 1;
+						if(check[i][s.hang][s.cot] == 0){
+							if(arr[i][s.hang][s.cot] == '#') {
+								check[i][s.hang][s.cot] = 1;
+							}
+							else{
+							    check[i][s.hang][s.cot] = 1;
+							    if(dem[i][s.hang][s.cot] == 0) dem[i][s.hang][s.cot] = dem[s.cao][s.hang][s.cot] + 1;
+							    vitri m;
+							    m.cao = i;
+							    m.hang = s.hang;
+							    m.cot = s.cot;
+							    q.push(m);
+							}
+						}
+					}
+				}
+		    }
+			
+			if(dem[y.cao][y.hang][y.cot] == 0) cout << "-1" << endl;
+			else cout << dem[y.cao][y.hang][y.cot] << endl;
+		}
+	}
+	
+}
+
+
+/*
+2
+3 4 5
+S . . . .
+. # # # .
+. # # . .
+# # # . #
+
+# # # # #
+# # # # #
+# # . # #
+# # . . .
+
+# # # # #
+# # # # #
+# . # # #
+# # # # E
+*/
