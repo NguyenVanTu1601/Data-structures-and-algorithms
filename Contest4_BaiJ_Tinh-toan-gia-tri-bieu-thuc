@@ -1,0 +1,130 @@
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+int Ut(char x){
+	if(x == '+') return 1;
+	if(x == '-') return 1;
+	if(x == '*') return 2;
+	if(x == '/') return 2;
+	return 0;
+}
+string doiso (int x){
+	string s;
+	while(x != 0){
+		s = (char)(x % 10 + '0') + s;
+		x = x / 10;
+	}
+	return s;
+}
+int doi(string s){
+	int sum = 0;
+	for(int i = 0; i < s.length(); i++){
+		sum = sum * 10 + (s[i] - '0');
+	}
+	return sum;
+}
+string doikt(char x){
+	string s = " ";
+	s[0] = x;
+	s[1] = '\0';
+	return s;
+}
+main(){
+	int t;
+	string s;
+	cin >> t;
+	cin.ignore();
+	while(t--){
+		stack < char > q;
+		getline(cin,s);
+		string a[1001];
+		int k = 0;
+		for(int i = 0; i < s.length(); i++){
+			if(s[i] >= '0' && s[i] <= '9'){
+				int sum = 0;
+				while(s[i] >='0' && s[i] <= '9'){
+					sum = sum * 10 + (s[i] - '0');
+					i++;
+				}
+				i--;
+				a[k] = doiso(sum);
+				//cout << a[k] << " ";
+				k++;
+			}
+			
+			if(s[i] == '(') q.push(s[i]);
+			if(s[i] == ')'){
+				while(q.top() != '('){
+					//cout << q.top();
+					char x = q.top();
+					a[k] = doikt(x);
+					//cout << a[k] << " ";
+					k++;
+					q.pop();
+				}
+				q.pop();
+			}
+			// Doan xam nho @@ 
+			if(s[i] == '+' || s[i] == '-' || (s[i]== '*') || (s[i] == '/')){
+				while(!q.empty() && Ut(q.top()) >= Ut(s.at(i))){
+					//cout << q.top();
+					char x = q.top();
+					a[k] = doikt(x);
+					k++;
+					q.pop();
+				}
+				q.push(s[i]);
+			}
+			//
+		}
+		if(!q.empty()){
+			while(!q.empty()){
+				char x = q.top();
+				a[k] = doikt(x);
+				k++;
+				q.pop();
+			}
+		}
+		stack<long long> qs;
+		for(int i = 0; i < k; i++){
+			if(a[i] != "+" && a[i] != "-" && a[i] != "*" && a[i] != "/"){
+				string m = a[i];
+				int c = doi(m);
+				qs.push(c);
+			}
+			else{
+				if(a[i] == "+"){
+					long long z = qs.top();
+					qs.pop();
+					long long v = qs.top();
+					qs.pop();
+					qs.push(z+v);
+				}
+				if(a[i] == "-"){
+					long long z = qs.top();
+					qs.pop();
+					long long v = qs.top();
+					qs.pop();
+					qs.push(v-z);
+				}
+				if(a[i] == "*"){
+					long long z = qs.top();
+					qs.pop();
+					long long v = qs.top();
+					qs.pop();
+					qs.push(z*v);
+				}
+				if(a[i] == "/"){
+					long long z = qs.top();
+					qs.pop();
+					long long v = qs.top();
+					qs.pop();
+					qs.push(v/z);
+				}
+			}
+		}
+		cout << qs.top();
+		cout << endl;
+	}
+    return 0;
+}
