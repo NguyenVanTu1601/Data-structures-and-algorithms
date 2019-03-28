@@ -1,0 +1,47 @@
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+#include <ext/pb_ds/assoc_container.hpp>
+using namespace __gnu_pbds;
+void performLeft(string &M) {
+	swap(M[0], M[3]); swap(M[3], M[7]); swap(M[7], M[8]);
+	swap(M[8], M[5]); swap(M[5], M[1]);
+}
+
+void performRight(string &M) {
+	swap(M[1], M[4]); swap(M[4], M[8]); swap(M[8], M[9]);
+	swap(M[9], M[6]); swap(M[6], M[2]);
+}
+string A = "0000000000";
+string Default = "0000000000";
+gp_hash_table<string , int> steps;
+void Input() {
+	Default[0] = '1'; Default[1] = '2'; Default[2] = '3';
+	Default[3] = '8'; Default[6] = '4';
+	Default[7] = '7'; Default[8] = '6'; Default[9] = '5';
+	for (int i=0; i<10; i++) cin >> A[i];
+}
+string Q[100000];
+int F = 0;
+int B = -1;
+
+main(){
+	Input();
+	Q[++B] = A; // B == 1;
+	steps[A] = 0;
+	while(F <= B){
+		string M1 = Q[F];
+		string M2 = Q[F];
+		F++;
+		if(M1 == Default) break;
+		int curr = steps[M1];
+		performLeft(M1);
+		performRight(M2);
+		steps[M1] = curr + 1;
+		steps[M2] = curr + 1;
+		Q[++B] = M1;
+		Q[++B] = M2;
+	}
+	cout << steps[Default];
+    return 0;
+}
