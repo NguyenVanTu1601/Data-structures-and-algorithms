@@ -1,3 +1,5 @@
+//Chọn mỗi ô ijk làm vị trí để loang ra , tại 1 ô bất kì loang BFS ra trên dưới trái phải và thực hiện 
+
 #include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
