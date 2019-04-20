@@ -1,3 +1,9 @@
+/*
+Duyệt trâu
+Tìm phân tử đầu tiên lớn hơn 
+Nếu ko có in ra -1
+*/
+
 #include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
