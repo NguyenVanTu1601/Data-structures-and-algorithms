@@ -1,3 +1,8 @@
+Tạo 2 mảng a lưu đầu vào và b = a
+Sắp xếp mảng b 
+So sánh a vs b để tìm phần tử đầu tiên có vị trí trong b khác a và vị trí cuối trong b khác a
+=> Số phần tử = cuối - đầu + 1;
+
 #include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
