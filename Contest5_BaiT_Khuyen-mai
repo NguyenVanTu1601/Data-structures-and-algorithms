@@ -1,3 +1,13 @@
+Nhận thấy 
++nếu sau khuyến mãi mà sp tăng giá thì phải mua nó trc khi nó tăng
++nếu sp giảm giá  thì phải mua cái giảm it trước , giảm nhiều sau
+=> Tạo 1 struct gồm 3 tp , giá trc , giá sau và độ chênh lệch = trc - sau 
+Sắp xếp theo độ chênh lệch càng nhỏ và chọn những sp chênh lệch ít trước
+Gỉa sử sp A , trc bán 5k sau bán 3k => lệch 2k
+sp B trc bán 3k sau bán 5k => lệch -2k 
+Vậy sẽ mua B trc để lấy giá 3k và mua A sau cũng để lấy giá 3k
+
+
 #include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
