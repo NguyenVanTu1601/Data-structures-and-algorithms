@@ -1,3 +1,13 @@
+/*
+B1 . Loại bỏ hết các ngoặc đúng bằng cách
+Nếu si = ) thi kiểm tra
++Nếu stack rỗng thì push si
++ Nếu không rỗng thì kiểm tra si-1 = ( hay ko , bằng thì xóa , ko thì lại push si
+B2 : Dêm số lần 
+Nếu có 2 ngoặc cùng chiều thì dem++
+Nếu có 2 ngoăc tạo thành ngoặc đúng thì dem+=2 do )( sau khi vào stack và ra sẽ thành ()
+if .... else 
+*/
 #include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
