@@ -1,3 +1,13 @@
+Xâu n = n-2 + n-1 
+Nếu i < n-2 tức là nó đang nằm bên phía xâu n-2 => gọi tới Fibo(n-2,i)
+Nếu i > n - 2 tức là nó đang nằm bên xâu n - 1 => Gọi Fibo(n-1 , i = i - n-2);
+VD 8 = 3 + 5 
+=> Nếu i = 6 
+thì nó sẽ nằm bên xâu 5 và vi trí trong xâu 5 là 6 - 3 = 3
+Minh họa : 1 1 1 2 2 2 2 2
+
+
+
 #include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
