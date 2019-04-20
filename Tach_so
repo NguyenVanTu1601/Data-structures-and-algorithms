@@ -1,0 +1,29 @@
+Cho một xâu ký tự bao gồm các chữ số. Hãy tìm tất cả các số có thể tạo ra bằng cách kết hợp các số trong xâu nhưng giữ nguyên vị trí. 
+Ví dụ với xâu S[] =”123” ta sẽ có các cách tạo các số như sau:
+123
+1 23
+12 3
+1 2 3
+
+#include <bits/stdc++.h>
+using namespace std;
+void Tachso(char s[]){
+    int l = strlen(s); 
+    for(int i = 0; i < pow(2, l - 1); i++){ // C0n + C1n + ... + Cnn = 2 ^ n => Chỉ duyệt tới nửa đầu cần 2 ^ n-1 do Ckn = Cn-k n
+        int k = i, x = 0;
+        cout << s[x]; x++;
+        for(int j = 0; j < strlen(s) - 1; j++){ //luon duyettren xau s[]            
+            if(k & 1) //neu khac 0 dua ra ky tu rong <=> k % 2 != 0
+                cout << " ";
+            k = k >> 1;//dich phai 1 bit <=> k = k / 2
+            cout << s[x];//dua ra s[x]
+            x++;
+        }
+        cout << "\n";//duoc mot lan        
+    }
+}
+int main() { 
+    char input[] = "1214";
+    Tachso(input);     
+    return 0;
+}
