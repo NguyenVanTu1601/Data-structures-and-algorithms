@@ -1,3 +1,7 @@
+Sắp xếp các thị trấn theo thứ tự từ bé tới lớn 
+Duyệt tính abs kc giữa 2 thị trấn 
+Sx mảng abs và tìm các phần từ nhỏ nhất
+
 #include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
