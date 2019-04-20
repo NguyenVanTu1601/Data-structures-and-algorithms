@@ -1,3 +1,8 @@
+Duyệt từ đầu tới cuối chuỗi , gặp các dấu mở thì push vào stack
+Ngược lại ktra stack có rỗng ko 
++ nếu rỗng thì return 0 
++ nếu ko rỗng thì kiểm tra đỉnh stack có trùng vs s[i] hay ko, sau khi ktra thì xóa đỉnh stack
+
 #include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
@@ -12,8 +17,8 @@ int kiemtra(string s){
 			    }
 			    if(s[i] == ']'){
 			    	if(q.top() != '[') return 0;
-				}
-				if(s[i] == '}'){
+			    }
+			    if(s[i] == '}'){
 			    	if(q.top() != '{') return 0;
 				}
 				q.pop(); // sau khi kiem tra neu k retrun 0 thi no dung -> xoa no di
