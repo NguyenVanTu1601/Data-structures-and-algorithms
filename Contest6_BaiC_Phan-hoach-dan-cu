@@ -1,0 +1,42 @@
+
+Chon cac khu co so dan dong nhat cho khu chua số lượng ít và ngược lại
+
+
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+	int t;
+	scanf("%d",&t);
+	int n,c,d;
+	
+	
+	while(t--){
+		scanf("%d %d %d",&n,&c,&d);
+		int a[n+1];
+		for(int i=0;i<n;i++){
+			cin>>a[i];
+		}
+		sort(a,a+n);
+		float k;
+		int v=min(c,d);
+		float tong1=0;
+		for(int i=n-1;i>=0;i--){
+			if(v==0) break;
+			tong1+=a[i];
+			v--;
+		}
+		tong1=tong1/min(c,d);
+		int z=max(c,d);
+		float tong2=0;
+		for(int i=n-1-min(c,d);i>=0;i--){
+			if(z==0) break;
+			tong2+=a[i];
+			z--;
+		}
+		tong2=tong2/max(c,d);
+		k=tong1+tong2;
+		printf("%0.6f\n",k);
+		
+		
+	}
+}
