@@ -1,0 +1,65 @@
+Push ông Ted vào queue 
+Trong khi queue không rỗng , lấy đỉnh queue ra đem so sánh xem trong ds nhập vào có ng cha nào trùng vs đỉnh queue thì tính tuổi
+và push lại vào queue , đồng thời người vừa tính lưu ra một vector khác để in ra sau
+
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+
+struct Danhsach{
+	string nameFather;
+	string nameBaby;
+	int yearOld;
+};
+
+struct Cha{
+	string name;
+	int tuoi;
+};
+
+bool cmp(Cha x, Cha y){
+	if(x.tuoi == y.tuoi) return x.name < y.name;
+	return x.tuoi > y.tuoi;
+}
+
+main(){
+	int t;
+	cin >> t;
+	int z = 1;
+	while(t--){
+		vector<Cha> vt;
+		queue <Cha> q;
+		int n;
+		cin >> n;
+		Danhsach ds[n+10];
+		for(int i = 0; i < n; i++){
+			cin >> ds[i].nameFather >> ds[i].nameBaby >> ds[i].yearOld;
+		}
+		Cha x;
+		x.name = "Ted";
+		x.tuoi = 100;
+		q.push(x);
+		
+		while(!q.empty()){
+			Cha s = q.front();
+			q.pop();
+			for(int i = 0; i < n; i++){
+				if(s.name == ds[i].nameFather){
+					Cha k;
+					k.name = ds[i].nameBaby;
+					k.tuoi = s.tuoi - ds[i].yearOld;
+					vt.push_back(k);
+					q.push(k);
+				}
+			}
+		}
+		cout << "DATASET " << z << endl;
+		z++;
+		sort(vt.begin(), vt.end(),cmp);
+		for(int i = 0; i < vt.size(); i++){
+			cout << vt[i].name << " " << vt[i].tuoi << endl;
+		}
+	}
+	
+    return 0;
+}
