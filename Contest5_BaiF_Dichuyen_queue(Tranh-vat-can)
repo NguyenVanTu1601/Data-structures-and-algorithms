@@ -42,8 +42,8 @@ main(){
 		
 	}
 	else{
-		check[x.hang][y.hang] = 1;
-		dem[x.hang][y.hang] = 0;
+		check[x.hang][x.cot] = 1;
+		dem[x.hang][x.cot] = 0;
 		queue< vitri>q;
 		q.push(x);
 		
