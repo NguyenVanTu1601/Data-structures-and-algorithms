@@ -1,4 +1,4 @@
-Duyệt từ phải sang trái số n(dạng string)
+Duyệt từ trai sang phải số n(dạng string)
 Gặp n[i] > 1 thì push 1 vào queue. Ngược lại push n[i] vào queue 
 sau khi cho hết vào thì ktra
 Trong khi queue không rỗng , lấy đỉnh queue ( 0,1) * 2 ^ (size(queue) - 1) và cộng lại 
