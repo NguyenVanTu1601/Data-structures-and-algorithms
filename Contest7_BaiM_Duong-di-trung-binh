@@ -1,0 +1,59 @@
+Ap dụng floy tìm đường đi ngắn nhất giữa tất cả các đỉnh
+
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+int a[1001][1001];
+int d[1001][1001];
+int MAX = 1e9+7;
+int m, n, q;
+
+int main(){
+	int t;
+	cin >> t;
+	while(t--){
+		cin>> n >> m;
+		for(int i = 1; i <= n; i++){
+			for(int j = 1; j <= n; j++){
+				a[i][j] = MAX;
+				d[i][j] = MAX;
+			}
+		}
+		int x , y, z;
+		for(int i=1;i<=m;i++){
+			cin >> x >> y ;
+			a[x][y] = 1;
+			d[x][y] = 1;
+		}
+		for(int k = 1; k <= n; k++){ // 
+			for(int i = 1; i <= n; i++){
+				for(int j = 1; j <= n; j++){
+					if(d[i][j] > d[i][k] + d[k][j]) d[i][j] = d[i][k] + d[k][j];
+				}
+			}
+		}
+		
+		for(int i = 1; i <= n; i++){
+			d[i][i]=0;
+		}
+		int dem = 0;
+		int sum = 0;
+		for(int i = 1; i <= n; i++){
+			for(int j = 1; j <= n; j++){
+				if(d[i][j] <= 100 && d[i][j] != 0){
+					sum += d[i][j];
+					dem++;
+				}
+			}
+		}
+//		for(int i = 1; i <= n; i++){
+//			for(int j = 1; j <= n; j++){
+//				cout << d[i][j] << " ";
+//			}
+//			cout << endl;
+//		}
+		printf("%.2f\n", sum*1.0/dem);
+	}
+	
+}
+// Edit : Tu Nguyen
