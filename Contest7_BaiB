@@ -1,0 +1,67 @@
+Bài toán gồm mảng a[] luu cac địa điểm đang đứng
+Có n địa điểm cho trước 
+Duyệt DFS tại 1 địa điểm trong a[] , nếu nó đi qua đỉnh nào thì ct tại đó tăng 1
+< ct[i] là mảng đếm số đỉnh đã đi qua đỉnh i>
+Kiểm tra ct
++ Nếu ct[i] = k tức là k điểm trong mảng a đi qua nó => nó thỏa mãn
++ ct[i] = k - 1 và i thuộc a thì đã có k điểm qa nó tính cả nó => thỏa mãn 
+
+
+
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+int k, n, m;
+int ct[1001]; // Luu so dinh co the di qua
+// Neu so dinh = k => dinh do duoc chon
+int check[1001];
+int a[1001]; // Luu cac dinh vi tri dung
+int arr[1001][1001]; // Luu ma tran
+void DFS(int u){
+	for(int v = 1; v <= n; v++){
+		if(arr[u][v] == 1 && check[v] == 1){
+			check[v] = 0;
+			DFS(v);
+		} 
+	}
+}
+
+
+main(){
+	cin >> k >> n >> m;
+	for(int i = 1; i <= k; i++){
+		cin >> a[i];
+	}
+	int x,y;
+	for(int i = 1; i <= m; i++){
+		cin >> x >> y;
+		arr[x][y] = 1;
+	}
+	for(int i = 1; i <= n; i++){
+		ct[i] = 0;
+		check[i] = 1;
+	}
+  // Ham duyet
+	for(int i = 1; i <= k; i++){
+		for(int j = 1; j <= n; j++){
+			check[j] = 1;
+		}
+		DFS(a[i]);
+		for(int j = 1; j <= n; j++){
+			if(check[j] == 0){
+				ct[j]++;
+			}
+		}
+	}
+  // Dem so dinh mà có k d
+	int dem = 0;
+	for(int i = 1; i <= n; i++){
+		if((ct[i] == k)) {
+			dem++;
+		}
+	}
+	for(int i = 1; i <= k; i++){
+		if(ct[a[i]] == k - 1) dem++;
+	}
+	cout << dem;
+}
