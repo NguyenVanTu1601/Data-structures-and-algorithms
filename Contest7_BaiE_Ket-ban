@@ -1,0 +1,61 @@
+B1: Lưu các đỉnh theo ds kề
+B2: Duyệt các đỉnh từ 1 - > n 
+Nếu đỉnh đó chưa xét tiến hành
++ Push đỉnh vào queue
+  Trong khi queue không rỗng 
+     +Duyệt tất cả các đỉnh kề với đỉnh queue và push đỉnh đã xét vào queue
+B3 : Trả về kq 
+
+
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+
+main(){
+	int t;
+	cin >> t;
+	int n, m;
+	int x , y;
+	while(t--){
+		cin >> n >> m;
+		vector<int> a[n+1]; // Luu dinh ke
+		int kt[n+1]; // Kiem tra dinh da xet chua
+		for(int i = 1; i <= n; i++){
+			kt[i] = 1;
+		}
+		//  Tao ds kề
+		for(int i = 1; i <= m; i++){
+			cin >> x >> y;
+			a[x].push_back(y);
+			a[y].push_back(x);
+		}
+		// Duyet cac dinh <=> tạo cây khung
+		int max = 0;
+		for(int i = 1; i <= n; i++){
+			if(kt[i] == 1){
+				kt[i] = 0;
+				queue<int>q;
+				q.push(i);
+				int dem = 1;
+				while(!q.empty()){
+					int s = q.front();
+					q.pop();
+					if(a[s].size() != 0 ){
+						for(int j = 0; j < a[s].size(); j++){
+							if(kt[a[s][j]] == 1){
+								q.push(a[s][j]);
+								dem++;
+								kt[a[s][j]] = 0;
+							}
+						}
+					}
+					
+				}
+				if(dem > max) max = dem;
+			}
+		}
+		cout << max << endl;
+	
+	}
+    return 0;
+}
