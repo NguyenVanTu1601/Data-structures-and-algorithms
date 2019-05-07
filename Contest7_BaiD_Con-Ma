@@ -1,0 +1,63 @@
+Đánh dấu vị trí điểm xuất phát vào struct vị trí 
+Đánh dấu vị trí điểm dừng
+B1 : push điểm xuất phát vào queue
+B2 : Trong khi queue không rỗng tiến hành
++ Lấy đỉnh queue
++ Duyệt 8 hướng tìm các vị tri con mã chưa tới và có thể tới được => Số bước tại đó = Số bước tại đỉnh + 1
++ Push vị trí có thể đi vào queue
+B3 : In ra số bước tại vị trí kết thúc
+
+
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+struct Vitri{
+	int hang;
+	int cot;
+};
+int xqX[8] = {2,1,-1,-2,-2,-1,1,2};
+int xqY[8] = {1,2,2,1,-1,-2,-2,-1};
+int dem[10][10];
+
+main(){
+	
+	int t;
+	cin >> t;
+	string s1;
+	string s2;
+	while(t--){
+		for(int i = 1; i <= 8; i++){
+	    	for(int j = 1; j <= 8; j++){
+	    	    dem[i][j] = 0;
+			}
+		}
+		cin >> s1 >> s2;
+		Vitri start;
+		Vitri end;
+		start.hang = s1[1] - '0';
+		start.cot = ((char)(s1[0] - 48)) - '0';
+		end.cot = ((char)(s2[0] - 48)) - '0';
+		end.hang = s2[1] - '0';
+		if(end.hang == start.hang && end.cot == start.cot) cout << 0 << endl;
+		else{
+			queue<Vitri>q;
+			q.push(start);
+			while(!q.empty()){
+				Vitri s = q.front();
+				q.pop();
+				for(int i = 0; i < 8; i++){
+					Vitri x;
+					x.hang = s.hang + xqX[i];
+					x.cot = s.cot + xqY[i];
+					if(dem[x.hang][x.cot] == 0 && (x.cot >= 1 && x.cot <= 8) && (x.hang >= 1 && x.hang <= 8)){
+						dem[x.hang][x.cot] = dem[s.hang][s.cot] + 1;
+						q.push(x);
+					}
+				}
+			}
+			cout << dem[end.hang][end.cot] << endl;
+		}
+	}
+
+    return 0;
+}
