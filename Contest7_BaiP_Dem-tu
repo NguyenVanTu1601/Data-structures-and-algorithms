@@ -1,0 +1,19 @@
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+
+main(){
+	ios_base::sync_with_stdio(false);
+	map<string,int>p;
+	string s;
+	while(cin >> s){
+		p[s]++;
+	}
+	cout << p.size() << endl;
+	map<string, int> ::iterator it;
+	for(it = p.begin(); it != p.end(); ++it){
+		cout << it->first << " " << it->second << endl;
+	}
+	
+    return 0;
+}
