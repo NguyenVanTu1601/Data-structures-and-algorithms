@@ -1,3 +1,9 @@
+Push các chữ số vào stack , mỗi lần push so sánh nó vs số đỉnh stack, nếu lớn hơn và chưa xóa đủ k số thì xóa đỉnh stack đi
+đến khi xóa đủ hoặc nhỏ hơn thì push vào
++ Sau khi push hết mà chưa xóa đủ thì xóa tiếp các số ở đỉnh cho đủ k số
++ In kq các số còn lại
+
+
 #include <iostream>
 #include <stack>
 #include <vector>
