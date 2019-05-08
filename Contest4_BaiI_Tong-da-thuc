@@ -1,3 +1,11 @@
+push lần lượt các số trong các đa thức vào queue khác nhau theo dạng cơ số - số mũ 
+Duyệt đồng thời 2 queue tới khi 1 trong 2 rỗng 
++ Nếu số mũ (q.top) == nhau thì cộng cơ số và push vào q3
+ngược lại thì push nó vào q3
++ Xem q1/q2 còn chưa rỗng thì push nốt 
+In q3 ra là xong 
+
+
 #include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
