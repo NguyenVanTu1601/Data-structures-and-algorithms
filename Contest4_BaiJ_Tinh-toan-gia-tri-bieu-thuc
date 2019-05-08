@@ -1,3 +1,6 @@
+B1 : Chuyển từ trung tố về hậu tố và gán vào 1 mảng string ( ko cho () vào )
+B2 : Duyệt mảng string Nếu gặp số thì push vào queue2 , gặp dấu thì đem 2 đỉnh top ra + - * / cho nhau r push vào
+B3 in kq là queue2.top() vì trong queue2 còn mỗi nó
 #include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
