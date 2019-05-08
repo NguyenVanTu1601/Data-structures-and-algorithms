@@ -1,3 +1,5 @@
+Nếu có 1 tplt duy nhất thì là cây
+
 #include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
