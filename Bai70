@@ -1,0 +1,85 @@
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+int check(char x){
+	if(x == '+' || x == '-' || x == '*' || x == '/' || x == '^') return 1;
+	else return 0;
+}
+int Ut(char x){
+	if(x == '+') return 1;
+	if(x == '-') return 1;
+	if(x == '*') return 2;
+	if(x == '/') return 2;
+	if(x == '^') return 3;
+	return 0;
+}
+main(){
+	int t;
+	cin >> t;
+	string s;
+	while(t--){
+		cin >> s;
+		// Doi sang trung to
+		stack <string> p;
+		for(int i = 0; i < s.length(); i++){
+			string x = "";
+			x += s[i];
+			if(check(s[i]) == 1){
+				string ss = p.top();
+				p.pop();
+				string sss= p.top();
+				p.pop();
+				string result = "(" + sss + s[i] + ss + ")";
+				p.push(result);
+			}
+			else p.push(x);
+		}
+		// Dap nguoc xau trung to
+		string k = "";
+		string kk = p.top();
+		for(int i = kk.length() - 1; i >= 0; i-- ){
+			k += kk[i];
+		}
+		
+		// Chuyen sang tien to
+		string kq = "";  // Dao nguoc mang thu duoc de co kq _ Bo cac dau // se hieu
+		stack < char > q;
+		for(int i = 0; i < k.length(); i++){
+			if(k.at(i) >= 'a' && k.at(i) <= 'z') {
+				//cout << k.at(i);
+				kq += k.at(i);
+			}
+			if(k.at(i) == ')') q.push(k.at(i));
+			if(k.at(i) == '('){
+				while(q.top() != ')'){
+					//cout << q.top();
+					kq+=q.top();
+					q.pop();
+				}
+				q.pop();
+			}
+			// Doan xam nho @@ 
+			if((k.at(i) == '+') || (k.at(i) == '-') || (k.at(i) == '*') || (k.at(i) == '/') || (k.at(i) == '^')){
+				while(!q.empty() && Ut(q.top()) >= Ut(k.at(i))){
+					//cout << q.top();
+					kq += q.top();
+					q.pop();
+				}
+				q.push(k.at(i));
+			}
+			//
+		}
+		if(!q.empty()){
+			while(!q.empty()){
+				//cout << q.top();
+				kq += q.top();
+				q.pop();
+			}
+		}
+		for(int i = kq.length() - 1; i >= 0; i--){
+			cout << kq[i];
+		}
+		cout << endl;
+	}
+    return 0;
+}
