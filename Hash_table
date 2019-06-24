@@ -1,0 +1,26 @@
+// Bang Bam
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+#include <ext/pb_ds/assoc_container.hpp>
+using namespace __gnu_pbds;
+/* Cau truc
+   qp<hash_table < key , value > name;
+   Cac key trong hashtable khong duoc sx theo thu tu ma sap xep theo thuat toan rieng
+   Muc dich tam biet la de luu cac gia tri ung voi key tuong ung de truy cap
+   Tang toc do rat truy cap rat cao
+*/
+gp_hash_table<string, int> steps;
+gp_hash_table<int, int > step;
+
+main(){
+	string x;
+	for(int i = 1; i <= 3; i++){
+		// Nho nhap 123 de cout
+		cin >> x;
+		steps[x] = i;
+	}
+	//if(steps.find("123") == steps.end()) 
+    cout << steps["123"];
+    return 0;
+}
