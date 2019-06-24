@@ -1,0 +1,64 @@
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+map <string,int> qp;
+// Tham khao them bai N contest 7 
+// map < key, value > namemap;
+main(){
+	////////////////////////////////////////////////////////
+	qp["a"] = 1;
+	qp["b"] = 2;
+	qp["c"] = 3;
+	map<string,int>::iterator it;
+	for(it = qp.begin(); it != qp.end(); ++it){
+		cout << it->first << " " << it->second << endl;
+	}
+	
+	///////////////////////////////////////////////////////////
+	map<string,int>::iterator ip = qp.find("b");
+	assert(ip != qp.end());
+	/*
+	Ham assert() Dung de kiem tra bieu thuc có sai hay khong
+	neu co se chi ra vi tri sai ... tuong tu bat loi try_catch trong java
+	*/
+	cout << ip->first << " " << ip->second << endl;
+	
+	//////////////////////////////////////////////////
+	cout << "Size = " << qp.size() <<"\n"; // kich co
+	cout <<"Size_Max = " << qp.max_size() << endl; // kich co toi da
+	cout <<"Empty = " << qp.empty() << endl; // Ktra rong
+	// qp.clear();   Xoa toan bo map
+	// qp.erase(const g) // xoa pt co key = g
+	// Cu phap chen insert({key,value});
+	/// Mot cai kha hay
+	qp.insert(pair<string,int>("f",6));
+	qp.insert({"e",5}); // them phan tu 
+	// insert( vitri, {key,value})  Chen vao key bang cach kiem tra tu vitri _ tang toc do chen
+	map<string,int> :: iterator itr = qp.find("b");
+	qp.insert(itr,{"d",4});
+	// Xoa tai vi tri key
+	qp.erase("b");
+	
+	/*
+	    Ham count(key) 
+	    Tim phan tu co khoa key . Tra ve 1 neu co , 0 neu khong 
+	*/
+	
+    /*
+    Duyet nguoc tu cuoi len
+    for( it = rbegin() ; it != rend(); it++){
+        cout << it->first <<" " << it->second << endl;
+    }
+    */
+    
+    /*
+    find()
+    Tra ve mot vong lap xet tu vi tri find 
+    */
+    
+	cout <<"Sau cac thao tac : " << endl;
+	for(itr = qp.begin(); itr != qp.end(); itr++){
+		cout << itr->first << " " << itr->second << endl;
+	}
+    return 0;
+}
