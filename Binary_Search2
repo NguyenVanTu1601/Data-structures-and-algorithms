@@ -1,0 +1,18 @@
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+// Dung cho mang da sap xep theo cau truc
+ll binarySearch(ll a[], ll value, ll start, ll end){
+	if(start > end) return -1;
+	ll mid = start + (end - start) / 2;
+	if(a[mid] == value) return mid;
+	else if(a[mid] > value) return binarySearch(a,value,start,mid-1);
+	else return binarySearch(a,value,mid+1,end);
+}
+
+main(){
+	ll a[10] = {1,2,5,7,9,10,15,28,58,63};
+	cout << binarySearch(a,8,0,9);
+    return 0;
+}
