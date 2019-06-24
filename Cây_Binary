@@ -1,0 +1,154 @@
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+// Khoi tao
+struct NODE{
+	int data;
+	NODE *pLeft;
+	NODE *pRight;
+};
+NODE* CreateNode(int x){
+	NODE* p = new NODE();
+	p->data = x;
+	p->pLeft = p->pRight=NULL;
+	return p;
+}
+
+// Chen NODE 
+// ** Tim vitri chen
+NODE* FindInsert(NODE* root, int x){
+    if (root == NULL){
+        return NULL;
+    }
+    NODE* p = root;
+    NODE* f = p;
+    while (p != NULL){
+        f = p;
+        if (p->data > x){
+            p = p->pLeft;
+        }
+        else{
+            p = p->pRight;
+        }
+    }        
+    return f;
+}
+
+// ** Chen node
+void InsertNode(NODE* &root, int x){
+    NODE* n = CreateNode(x);
+    if (root == NULL){
+        root = n;
+        return;
+    }
+    else{
+        NODE* f = FindInsert(root, x);
+        if (f != NULL){
+            if (f->data > x){
+                f->pLeft = n;
+            }
+            else{
+                f->pRight = n;
+            }
+        }
+    }
+}
+
+// Tao cay
+void CreateTree(NODE* &root, int a[], int n){
+    for (int i = 0; i < n; i++){
+        InsertNode(root, a[i]);
+    }
+}
+
+// Searching _Tim kiem
+
+NODE* SearchNode(NODE* root, int x){
+    if (root == NULL)
+        return NULL;
+ 
+	NODE* p = root;
+	while (p != NULL){
+		if (p->data == x){
+			return p;
+		}
+		else if (p->data > x){
+			p = p->pLeft;
+		}
+		else{
+			p = p->pRight;
+		}
+	}
+}
+
+// Duyet goc_trai_phai
+void NLR(NODE* root){
+	if (root != NULL){
+		printf("%d \t", root->data);
+		NLR(root->pLeft);
+		NLR(root->pRight);
+	}
+}
+
+// Duyet trcsau _ trai phai ( left_node_right)
+void LNR(NODE* root)
+{
+	if (root != NULL)
+	{
+		LNR(root->pLeft);
+		printf("%d \t", root->data);
+		LNR(root->pRight);
+	}
+}
+
+
+// Left-right-node
+void LRN(NODE* root)
+{
+	if (root != NULL)
+	{
+		LRN(root->pLeft);
+		LRN(root->pRight);
+		printf("%d \t", root->data);
+	}
+}
+
+
+// Tim Node La : 
+void nodeLa(NODE* root)
+{
+	if (root != NULL)
+	{
+		if(root->pLeft == NULL && root->pRight == NULL){
+			cout << root->data << " ";
+		}
+		else {
+			nodeLa(root->pLeft);
+		    nodeLa(root->pRight);
+		}
+	}
+}
+
+
+int main()
+{
+	int t;
+	cin >> t;
+	int n;
+	while(t--){
+		NODE* root = NULL;
+		cin >> n;
+		int a[n+1];
+		for(int i = 0; i < n; i++){
+			cin >> a[i];
+		}
+		CreateTree(root, a, n);
+		nodeLa(root);
+		cout << endl;
+	}
+	
+	//NLR(root);
+	//LNR(root);
+	
+	return 0;
+}
