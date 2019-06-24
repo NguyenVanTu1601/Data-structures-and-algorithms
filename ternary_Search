@@ -1,0 +1,20 @@
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+ll ternarySearch(ll a[], ll value, ll start, ll end ){
+	if(start > end) return -1; // khong tim thay
+	ll mid1 = start + (end - start) / 3;
+	ll mid2 = start + 2* (end - start) / 3;
+	if(a[mid1] == value) return mid1;
+	else if(a[mid2] == value) return mid2;
+	else if(value < a[mid1]) return ternarySearch(a,value,start,mid1 -1);
+	else if(value > a[mid2]) return ternarySearch(a,value,mid2 + 1,end);
+	else return ternarySearch(a,value,mid1,mid2);
+}
+main(){
+	ll a[10] = {1,2,5,7,9,10,15,28,58,63};
+	
+	cout << ternarySearch(a,8,0,9);
+    return 0;
+}
